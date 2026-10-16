@@ -9,7 +9,7 @@ wire [3:0] stageConnector;
 
 full_adder lsb(
     .A(A[0]),
-    .B(~B[0]),
+    .B(B[0]),
     .Cin(1'b0),
     .Y(stageConnector[0]),
     .Cout(carry[0])
@@ -22,7 +22,7 @@ generate
     for (i = 1; i < 4; i = i + 1) begin
         full_adder add(
             .A(A[i]),
-            .B(~B[i]),
+            .B(B[i]),
             .Cin(carry[i-1]),
             .Y(stageConnector[i]),
             .Cout(carry[i])
@@ -33,22 +33,14 @@ endgenerate
 genvar j;
 assign carry2[0] = carry[3];
 
-full_adder lsb2(
-    .A(stageConnector[0]),
-    .B(1'b0),
-    .Cin(carry2[0]),
-    .Y(Out[0]),
-    .Cout(carry2[1])
-);
-
 generate
-    for (j = 1; j < 5; j = j + 1) begin
+    for (j = 0; j < 4; j = j + 1) begin
         full_adder add1(
-            .A(stageConnector[j-1]),
+            .A(stageConnector[j]),
             .B(1'b0),
-            .Cin(carry2[j-1]),
+            .Cin(carry2[j]),
             .Y(Out[j]),
-            .Cout(carry2[j])
+            .Cout(carry2[j+1])
         );
     end
 endgenerate

@@ -16,4 +16,9 @@ ones_compliment oneCompInst(
     .Out(led[5:2])
 );
 
+twos_compliment twoCompInst(
+    .A(sw[9:2]),
+    .Y(led[13:6])
+);
+
 endmodule

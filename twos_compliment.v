@@ -1,8 +1,9 @@
-//module 2scomp(
-	input{7:0] A,
+module twos_compliment(
+	input[7:0] A,
 	output [7:0] Y
-	wire [7:0] carry;
-	);
+);
+
+    wire [7:0] carry;
 	
 	genvar i;
 	generate 
@@ -17,12 +18,10 @@
 			full_adder add(
 				.A(~A[i]),
 				.B(1'b0),
-				.Y(~Y[i]),
+				.Y(Y[i]),
 				.Cin(carry[i-1]),
 				.Cout(carry[i])
 			);
 		end
-	end generate
-end module 
-	
-	
+	endgenerate
+endmodule
